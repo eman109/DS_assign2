@@ -16,3 +16,11 @@ buildNumber.properties
 # JDT-specific (Eclipse Java Development Tools)
 .classpath
 .env
+# Database files
+data/
+*.db
+*.mv.db
+*.trace.db
+
+# Target folders
+*/target/

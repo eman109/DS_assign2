@@ -20,9 +20,7 @@ public class UserResource {
     @EJB
     private UserService userService;
 
-    // POST /api/users/register
-    // Body: { "username":"ali", "password":"123", "role":"CUSTOMER",
-    // "initialBalance":200 }
+
     @POST
     @Path("/register")
     public Response register(String body) {
@@ -36,8 +34,7 @@ public class UserResource {
         return Response.ok(result).build();
     }
 
-    // POST /api/users/login
-    // Body: { "username":"ali", "password":"123" }
+
     @POST
     @Path("/login")
     public Response login(String body) {
@@ -48,8 +45,7 @@ public class UserResource {
         return Response.ok(result).build();
     }
 
-    // POST /api/users/{id}/add-funds
-    // Body: { "amount": 100 }
+
     @POST
     @Path("/{id}/add-funds")
     public Response addFunds(@PathParam("id") int userId, String body) {
@@ -58,15 +54,12 @@ public class UserResource {
         return Response.ok(result).build();
     }
 
-    // GET /api/users/{id}/wallet
     @GET
     @Path("/{id}/wallet")
     public Response getWallet(@PathParam("id") int userId) {
         return Response.ok(userService.getWallet(userId)).build();
     }
 
-    // POST /api/users/{id}/deduct
-    // Called by Booking Service — Body: { "amount": 80 }
     @POST
     @Path("/{id}/deduct")
     public Response deduct(@PathParam("id") int userId, String body) {
@@ -75,8 +68,7 @@ public class UserResource {
         return Response.ok(result).build();
     }
 
-    // POST /api/users/{id}/refund
-    // Called by Booking Service on failure — Body: { "amount": 80 }
+
     @POST
     @Path("/{id}/refund")
     public Response refund(@PathParam("id") int userId, String body) {
@@ -85,7 +77,6 @@ public class UserResource {
         return Response.ok(result).build();
     }
 
-    // GET /api/users/all ← Admin only
     @GET
     @Path("/all")
     public Response getAllUsers() {

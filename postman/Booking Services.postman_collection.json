@@ -1,0 +1,202 @@
+{
+  "info": {
+    "_postman_id": "bcda63ec-96e2-4cf0-8469-b543dfde5435",
+    "name": "Booking Services",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "43842429",
+    "_collection_link": "https://go.postman.co/collection/43842429-bcda63ec-96e2-4cf0-8469-b543dfde5435?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Make sure offer is active again",
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"price\": 80,\r\n  \"availableDate\": \"2026-05-20\",\r\n  \"active\": true\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8081/api/offers/1",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8081",
+          "path": [
+            "api",
+            "offers",
+            "1"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Book the offer",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"customerId\": 2,\r\n  \"customerName\": \"eman\",\r\n  \"offerId\": 1\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8082/api/bookings",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8082",
+          "path": [
+            "api",
+            "bookings"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "check wallet deducted",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/user-service/api/users/2/wallet",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "user-service",
+            "api",
+            "users",
+            "2",
+            "wallet"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "check rabbit notification for customer",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8082/api/bookings/notifications/customer",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8082",
+          "path": [
+            "api",
+            "bookings",
+            "notifications",
+            "customer"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "check rabbit notifications for provider",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8082/api/bookings/notifications/provider",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8082",
+          "path": [
+            "api",
+            "bookings",
+            "notifications",
+            "provider"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "View Customer booking history",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8082/api/bookings/customer/2",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8082",
+          "path": [
+            "api",
+            "bookings",
+            "customer",
+            "2"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "View Provider Completed services",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8082/api/bookings/provider/3",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8082",
+          "path": [
+            "api",
+            "bookings",
+            "provider",
+            "3"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Admin view all bookings",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8082/api/bookings/all",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8082",
+          "path": [
+            "api",
+            "bookings",
+            "all"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}

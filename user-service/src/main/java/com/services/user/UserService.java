@@ -204,6 +204,49 @@ public class UserService {
         }
     }
 
+    //category Admin
+    public String addCategory(String name) {
+        try (Connection conn = db.getConnection()) {
+            PreparedStatement check = conn.prepareStatement(
+                    "SELECT id FROM categories WHERE name = ?");
+            check.setString(1, name);
+            if (check.executeQuery().next()) {
+                return error("Category already exists");
+            }
+
+            PreparedStatement stmt = conn.prepareStatement(
+                    "INSERT INTO categories (name) VALUES (?)");
+            stmt.setString(1, name);
+            stmt.executeUpdate();
+            return success("Category added: " + name);
+
+        } catch (Exception e) {
+            return error(e.getMessage());
+        }
+    }
+
+    //Get all categories
+    public String getAllCategories() {
+        try (Connection conn = db.getConnection()) {
+            ResultSet rs = conn.createStatement()
+                    .executeQuery("SELECT * FROM categories");
+
+            JSONArray arr = new JSONArray();
+            while (rs.next()) {
+                JSONObject c = new JSONObject();
+                c.put("id", rs.getInt("id"));
+                c.put("name", rs.getString("name"));
+                arr.put(c);
+            }
+            return arr.toString();
+
+        } catch (Exception e) {
+            return error(e.getMessage());
+        }
+    }
+
+
+
     private String success(String msg) {
         return new JSONObject().put("message", msg).toString();
     }

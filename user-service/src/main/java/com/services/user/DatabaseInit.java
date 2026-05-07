@@ -22,7 +22,7 @@ public class DatabaseInit {
 
             Statement stmt = conn.createStatement();
 
-            //users table, stores custonmers and providers
+            // users table, stores custonmers and providers
             stmt.execute("""
                         CREATE TABLE IF NOT EXISTS users (
                             id INT AUTO_INCREMENT PRIMARY KEY,
@@ -34,7 +34,21 @@ public class DatabaseInit {
                         )
                     """);
 
-            //Admin user, created once at startup
+            stmt.execute("""
+                        CREATE TABLE IF NOT EXISTS categories (
+                            id INT AUTO_INCREMENT PRIMARY KEY,
+                            name VARCHAR(100) UNIQUE NOT NULL
+                        )
+                    """);
+
+            // Default categories
+            stmt.execute("MERGE INTO categories (name) KEY(name) VALUES ('Plumbing')");
+            stmt.execute("MERGE INTO categories (name) KEY(name) VALUES ('Carpentry')");
+            stmt.execute("MERGE INTO categories (name) KEY(name) VALUES ('Electrical')");
+            stmt.execute("MERGE INTO categories (name) KEY(name) VALUES ('Cleaning')");
+            stmt.execute("MERGE INTO categories (name) KEY(name) VALUES ('Painting')");
+
+            // Admin user, created once at startup
             stmt.execute("""
                         MERGE INTO users (username, password, role, wallet)
                         KEY(username)
@@ -48,7 +62,7 @@ public class DatabaseInit {
         }
     }
 
-    //to call by userSerivce to get a connection
+    // to call by userSerivce to get a connection
     public Connection getConnection() throws SQLException {
         return DriverManager.getConnection(DB_URL, "sa", "");
     }

@@ -82,4 +82,19 @@ public class UserResource {
     public Response getAllUsers() {
         return Response.ok(userService.getAllUsers()).build();
     }
+
+
+    @POST
+    @Path("/categories")
+    public Response addCategory(String body) {
+        JSONObject json = new JSONObject(body);
+        return Response.ok(
+                userService.addCategory(json.getString("name"))).build();
+    }
+
+    @GET
+    @Path("/categories")
+    public Response getCategories() {
+        return Response.ok(userService.getAllCategories()).build();
+    }
 }
